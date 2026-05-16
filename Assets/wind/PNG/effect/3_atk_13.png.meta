@@ -100,15 +100,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 3_atk_13_0
+      name: efecto2
       rect:
         serializedVersion: 2
-        x: 112
+        x: 110
         y: 0
-        width: 49
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 60
+        height: 60
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a84e0c1fa70fbc441a210d9d11e592b3
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      3_atk_13_0: -7413003797719194149
+      efecto2: -7413003797719194149
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
