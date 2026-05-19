@@ -103,12 +103,12 @@ TextureImporter:
       name: take_hit_6_0
       rect:
         serializedVersion: 2
-        x: 117
+        x: 112
         y: 0
-        width: 50
+        width: 62
         height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.34, y: 0.58}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4125359fc2c0e4ab88bef2faf43c0633
     internalID: 0
     vertices: []
     indices: 
