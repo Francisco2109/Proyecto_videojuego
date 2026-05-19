@@ -25,8 +25,8 @@ public class TeleportAbility : MonoBehaviour
     {
         if (canTeleport && !isOnCooldown && Input.GetKeyDown(activationKey))
         {
-            Teleport();
-            StartCooldown();
+            Teleport(); // Accion de Habilidad de Teletransporte
+            StartCooldown(); // Iniciar cooldown para evitar teletransportes consecutivos rápidos
         }
     }
 
@@ -34,33 +34,33 @@ public class TeleportAbility : MonoBehaviour
     {
         if (currentBlock == null) return;
 
-        Bounds bounds = currentBlock.bounds;
-        Vector3 newPosition = transform.position;
+        Bounds bounds = currentBlock.bounds; // obtenemos los limites del bloque para calcular la nueva posicion del player
+        Vector3 newPosition = transform.position; // partimos de la posicion actual del player para modificar solo el eje correspondiente
 
         switch (axis)
         {
-            case TeleportAxis.Vertical:
+            case TeleportAxis.Vertical: // Agua / Water
                 newPosition.y = (transform.position.y < bounds.center.y)
                     ? bounds.max.y + offset
                     : bounds.min.y - offset;
                 break;
 
-            case TeleportAxis.Horizontal:
+            case TeleportAxis.Horizontal: // Viento / Wind
                 newPosition.x = (transform.position.x < bounds.center.x)
                     ? bounds.max.x + offset
                     : bounds.min.x - offset;
                 break;
         }
 
-        transform.position = newPosition;
+        transform.position = newPosition; // Teletransportamos al player a la nueva posicion calculada
     }
     private async void StartCooldown()
     {
         isOnCooldown = true;
-        await Task.Delay(cooldownMilliseconds);
+        await Task.Delay(cooldownMilliseconds); // Usa el tiempo de la compu no del juego, asi que no se ve afectado por Time.timeScale
         isOnCooldown = false;
     }
-
+    // Detectamos cuando el player entra en un bloque teleportable para activar la posibilidad de teletransportarse, y guardamos una referencia al bloque actual para usarla en el calculo de la nueva posicion
     private void OnTriggerEnter2D(Collider2D other)
     {
         if ((teleportLayer.value & (1 << other.gameObject.layer)) != 0)
@@ -69,7 +69,7 @@ public class TeleportAbility : MonoBehaviour
             currentBlock = other;
         }
     }
-
+    // Es importante resetear el estado de teletransporte al salir del bloque para evitar que el player pueda teletransportarse desde una posicion no valida
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other == currentBlock)
