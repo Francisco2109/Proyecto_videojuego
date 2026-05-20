@@ -13,6 +13,7 @@ public class TeleportAbility : MonoBehaviour
     [Header("Script Settings")]
     public TeleportAxis axis; // para unity UI elegir axis TP
     public LayerMask teleportLayer; // para unity UI elegir layer de bloques teleportables
+    // TODO agregar doble presion de tecla para accionar el TP
     public KeyCode activationKey = KeyCode.E; // tecla para activar el TP
     public float offset = 0.1f; // distancia extra para evitar quedar atrapado en el bloque al teletransportarse
     private int cooldownMilliseconds = 500; // tiempo de cooldown entre teletransportes
