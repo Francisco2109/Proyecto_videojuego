@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 833024869}
   - component: {fileID: 833024868}
   - component: {fileID: 833024871}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ Camera:
   m_GameObject: {fileID: 833024867}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -405,6 +405,18 @@ PrefabInstance:
     - target: {fileID: 5099909309982475074, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116074067284620675, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8490566
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116074067284620675, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.068885654
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116074067284620675, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.19559714
       objectReference: {fileID: 0}
     - target: {fileID: 5901511463974468928, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
       propertyPath: m_Text
