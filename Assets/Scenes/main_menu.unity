@@ -418,6 +418,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2325367719646841723, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -283
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325367719646841723, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -304
+      objectReference: {fileID: 0}
     - target: {fileID: 3202139284643427095, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
       propertyPath: m_Color.b
       value: 0.40000004
@@ -462,6 +470,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 3.3073196
       objectReference: {fileID: 0}
+    - target: {fileID: 4937002651156817398, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 217
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937002651156817398, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -304
+      objectReference: {fileID: 0}
     - target: {fileID: 5081800253026026166, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1
@@ -489,6 +505,14 @@ PrefabInstance:
     - target: {fileID: 5116074067284620675, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
       propertyPath: m_Color.r
       value: 0.19559714
+      objectReference: {fileID: 0}
+    - target: {fileID: 5633855890793620269, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
+      propertyPath: sceneToLoad
+      value: game
+      objectReference: {fileID: 0}
+    - target: {fileID: 5633855890793620269, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
+      propertyPath: loadDelayTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5901511463974468928, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
       propertyPath: m_Text
@@ -687,7 +711,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6805092825884807360, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bef625a08cab42499ad08e3a934aa0c, type: 3}
