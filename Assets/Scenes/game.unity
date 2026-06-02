@@ -5918,7 +5918,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0.5
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -5949,7 +5949,7 @@ MonoBehaviour:
   rightKey: 100
   jumpKey: 119
   groundCheck: {fileID: 400603776}
-  groundCheckRadius: 0.2
+  groundCheckRadius: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -6025,7 +6025,7 @@ Animator:
   m_GameObject: {fileID: 1374003713}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fa7eff09c38d6b64fa8249e71379546a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 73dd9cd1e7e2e5645b4d9ea4949036e2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

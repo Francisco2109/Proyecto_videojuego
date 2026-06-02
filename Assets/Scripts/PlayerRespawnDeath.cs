@@ -3,14 +3,22 @@ using UnityEngine;
 public class PlayerRespawnDeath : MonoBehaviour
 {
     [Header("Respawn")]
-    [SerializeField] private Transform spawnPoint; // Asignar el punto de respawn en el Inspector
+    [SerializeField] private Transform spawnPoint; 
 
     [Header("Death Layer")]
-    [SerializeField] private LayerMask deathLayer; // configura este LayerMask en el Inspector para incluir los objetos que causan la muerte del jugador
+    [SerializeField] private LayerMask deathLayer; 
+
+    // --- NUEVA VARIABLE PARA ANIMACIÓN ---
+    private Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((deathLayer.value & (1 << collision.gameObject.layer)) != 0) // Verifica si el objeto con el que colisionamos está en el layer de muerte
+        if ((deathLayer.value & (1 << collision.gameObject.layer)) != 0) 
         {
             Die();
         }
@@ -18,11 +26,17 @@ public class PlayerRespawnDeath : MonoBehaviour
 
     private void Die()
     {
+        // 1. Activamos la animación de muerte de inmediato
+        if (anim != null)
+        {
+            anim.SetTrigger("Die");
+        }
+
         GameManager.Instance.LoseLife(); 
 
-        transform.position = spawnPoint.position; // Teletransporta al jugador al punto de respawn
+        transform.position = spawnPoint.position; 
 
-        Rigidbody2D rb = GetComponent<Rigidbody2D>(); // Reinicia la velocidad del jugador para evitar que siga moviéndose después de morir
+        Rigidbody2D rb = GetComponent<Rigidbody2D>(); 
 
         if (rb != null)
         {

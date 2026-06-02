@@ -18,15 +18,23 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb; 
     private bool isGrounded;
+    
+    // --- NUEVAS VARIABLES PARA ANIMACIÓN ---
+    private Animator anim;
+    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        // Buscamos los componentes necesarios en el mismo objeto
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
         HandleJump();
+        UpdateAnimator(); // <-- Llamamos a la actualización de animaciones
     }
 
     private void FixedUpdate()
@@ -39,9 +47,15 @@ public class PlayerMovement : MonoBehaviour
         float direction = 0f;
 
         if (Input.GetKey(leftKey))
+        {
             direction = -1f;
+            if (spriteRenderer != null) spriteRenderer.flipX = true; // Mira a la izquierda
+        }
         else if (Input.GetKey(rightKey))
+        {
             direction = 1f;
+            if (spriteRenderer != null) spriteRenderer.flipX = false; // Mira a la derecha
+        }
 
         rb.linearVelocity = new Vector2(direction * moveSpeed, rb.linearVelocity.y); 
     }
@@ -52,11 +66,26 @@ public class PlayerMovement : MonoBehaviour
             groundCheck.position,
             groundCheckRadius,
             groundLayer
-        ); // check de que este tocando el piso bool
+        ); 
 
         if (isGrounded && Input.GetKeyDown(jumpKey))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); 
         }
+    }
+
+    // --- NUEVO MÉTODO PARA ENVIAR DATOS AL ANIMATOR ---
+    private void UpdateAnimator()
+    {
+        if (anim == null) return;
+
+        // 1. Enviamos la velocidad horizontal en valor absoluto (siempre positivo) usando rb.linearVelocity.x
+        anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+
+        // 2. Enviamos el estado del suelo
+        anim.SetBool("IsGrounded", isGrounded);
+
+        // 3. Enviamos la velocidad vertical para que el Animator distinga entre Jump (subiendo) y Fall (bajando)
+        anim.SetFloat("VerticalVelocity", rb.linearVelocity.y);
     }
 }
