@@ -20,7 +20,7 @@ public class SFXMixerSliderControl : MonoBehaviour
 
     void Start()
     {
-        if (slider != null)
+        if (slider != null && audioMixer != null)
         {
             // Sync slider with current mixer value
             float currentValue;

@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         HandleJump();
+        UpdateWalkingSound();
         UpdateAnimator(); // <-- Llamamos a la actualización de animaciones
     }
 
@@ -71,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && Input.GetKeyDown(jumpKey))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); 
+
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlayJump();
+            }
         }
     }
 
@@ -87,5 +93,14 @@ public class PlayerMovement : MonoBehaviour
 
         // 3. Enviamos la velocidad vertical para que el Animator distinga entre Jump (subiendo) y Fall (bajando)
         anim.SetFloat("VerticalVelocity", rb.linearVelocity.y);
+    }
+
+    private void UpdateWalkingSound()
+    {
+        if (SoundManager.Instance == null)
+            return;
+
+        bool isWalking = isGrounded && Mathf.Abs(rb.linearVelocity.x) > 0.01f;
+        SoundManager.Instance.SetWalking(gameObject, isWalking);
     }
 }

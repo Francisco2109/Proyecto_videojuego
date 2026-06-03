@@ -9,7 +9,7 @@ public class MusicMixerSliderControl : MonoBehaviour
 {
     [Header("Assign in Inspector")]
     public AudioMixer audioMixer;                 // Drag your AudioMixer asset here
-    public string mixerExposedParameter = "SFX Control Variable"; // Exposed parameter name
+    public string mixerExposedParameter = "Music Control Variable"; // Exposed parameter name
     public Slider slider;                         // Drag your UI Slider here
 
     [Header("Slider Range Settings")]
@@ -20,7 +20,7 @@ public class MusicMixerSliderControl : MonoBehaviour
 
     void Start()
     {
-        if (slider != null)
+        if (slider != null && audioMixer != null)
         {
             // Sync slider with current mixer value
             float currentValue;

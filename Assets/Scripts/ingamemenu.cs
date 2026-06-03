@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Canvas pauseCanvas;
 
     [Header("Game Over UI")]
-    [SerializeField] private Canvas gameOverCanvas;
+    [SerializeField] private GameObject gameOverCanvas;
 
     [Header("Victory")]
-    [SerializeField] private Canvas victoryCanvas;
+    [SerializeField] private GameObject victoryCanvas;
 
     [Header("Timer")]
     [SerializeField] private float timeLimit = 120f;
@@ -51,11 +51,10 @@ public class GameManager : MonoBehaviour
             pauseCanvas.enabled = false;
 
         if (gameOverCanvas != null)
-            gameOverCanvas.enabled = false;
+            gameOverCanvas.SetActive(false);
 
         if (victoryCanvas != null)
-            victoryCanvas.enabled = false;
-
+            victoryCanvas.SetActive(false);
         UpdateUI();
     }
 
@@ -116,10 +115,16 @@ public class GameManager : MonoBehaviour
     {
         gameEnded = true;
 
-        Time.timeScale = 0f;
+
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlayLose();
 
         if (gameOverCanvas != null)
-            gameOverCanvas.enabled = true;
+            gameOverCanvas.SetActive(true);
+
+        Invoke(nameof(StopSounds), 0.5f); // Detiene sonidos después de un breve retraso para permitir que el stinger se reproduzca
+
+       // Time.timeScale = 0f;
     }
 
     // ==================== PAUSE ====================
@@ -140,6 +145,11 @@ public class GameManager : MonoBehaviour
             pauseCanvas.enabled = true;
     }
 
+    public void StopSounds(){
+        
+        SoundManager.Instance.StopAllSounds();
+    }
+
     public void ResumeGame()
     {
         Time.timeScale = 1f;
@@ -152,6 +162,9 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         Time.timeScale = 1f;
+
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.StopAllSounds();
 
         SceneManager.LoadScene(
             SceneManager.GetActiveScene().buildIndex
@@ -218,9 +231,14 @@ public class GameManager : MonoBehaviour
     {
         gameEnded = true;
 
-        Time.timeScale = 0f;
+
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlayVictory();
 
         if (victoryCanvas != null)
-            victoryCanvas.enabled = true;
+            victoryCanvas.SetActive(true);
+
+        Invoke(nameof(StopSounds), 0.5f); 
+        //Time.timeScale = 0f;
     }
 }
