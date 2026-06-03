@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Victory")]
     [SerializeField] private Canvas victoryCanvas;
-    [SerializeField] private PlayerVictory waterGirlVictory;
-    [SerializeField] private PlayerVictory windBoyVictory;
 
     [Header("Timer")]
     [SerializeField] private float timeLimit = 120f;
@@ -46,12 +44,17 @@ public class GameManager : MonoBehaviour
 
         currentTime = timeLimit;
         currentLives = maxLives;
+        player1InGoal = false;
+        player2InGoal = false;
 
         if (pauseCanvas != null)
             pauseCanvas.enabled = false;
 
         if (gameOverCanvas != null)
             gameOverCanvas.enabled = false;
+
+        if (victoryCanvas != null)
+            victoryCanvas.enabled = false;
 
         UpdateUI();
     }
@@ -182,13 +185,30 @@ public class GameManager : MonoBehaviour
     }
 
     // ==================== VICTORY ====================
+    public void SetPlayerInGoal(PlayerVictory.PlayerSlot playerSlot, bool isInGoal)
+    {
+        if (gameEnded)
+            return;
+
+        switch (playerSlot)
+        {
+            case PlayerVictory.PlayerSlot.Player1:
+                player1InGoal = isInGoal;
+                break;
+            case PlayerVictory.PlayerSlot.Player2:
+                player2InGoal = isInGoal;
+                break;
+        }
+
+        CheckVictoryConditions();
+    }
+
     public void CheckVictoryConditions()
     {
         if (gameEnded)
             return;
 
-        if (waterGirlVictory.IsPlayerInside() &&
-            windBoyVictory.IsPlayerInside())
+        if (player1InGoal && player2InGoal)
         {
             Victory();
         }

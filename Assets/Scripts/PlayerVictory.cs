@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class PlayerVictory : MonoBehaviour
 {
+    public enum PlayerSlot
+    {
+        Player1,
+        Player2
+    }
+
+    [SerializeField] private PlayerSlot playerSlot;
     [SerializeField] private GameObject targetPlayer; // El jugador que debe estar dentro de la zona para ganar
 
     private bool playerInside;
@@ -14,7 +21,11 @@ public class PlayerVictory : MonoBehaviour
         if (other.gameObject == targetPlayer)
         {
             playerInside = true; // Marca que el jugador está dentro de la zona de victoria
-            GameManager.Instance.CheckVictoryConditions(); // Llama al método para verificar las condiciones de victoria
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.SetPlayerInGoal(playerSlot, true);
+            }
         }
     }
 
@@ -23,6 +34,11 @@ public class PlayerVictory : MonoBehaviour
         if (other.gameObject == targetPlayer)
         {
             playerInside = false; // Marca que el jugador ha salido de la zona de victoria
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.SetPlayerInGoal(playerSlot, false);
+            }
         }
     }
 
