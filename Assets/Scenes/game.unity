@@ -1311,7 +1311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 332044818}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2982,8 +2982,8 @@ MonoBehaviour:
   leftKey: 276
   rightKey: 275
   jumpKey: 273
-  groundCheck: {fileID: 332044818}
-  groundCheckRadius: 0.2
+  groundCheck: {fileID: 650609054}
+  groundCheckRadius: 0.4
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -5949,7 +5949,7 @@ MonoBehaviour:
   rightKey: 100
   jumpKey: 119
   groundCheck: {fileID: 400603776}
-  groundCheckRadius: 0.5
+  groundCheckRadius: 0.8
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
