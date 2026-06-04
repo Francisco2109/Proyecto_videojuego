@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuButton : MonoBehaviour
 {
     [Header("Scene")]
-    [SerializeField] private string mainMenuScene;
+    [SerializeField] private int mainMenuScene;
 
     public void GoToMainMenu()
     {

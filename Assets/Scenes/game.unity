@@ -740,7 +740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseKey: 27
   restartKey: 114
-  pauseCanvas: {fileID: 0}
+  pauseCanvas: {fileID: 912253917}
   gameOverCanvas: {fileID: 1582738136}
   victoryCanvas: {fileID: 147242564}
   timeLimit: 120
@@ -3803,7 +3803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6faf2eadfefe3249bfe9d6957dc247a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuScene: main_menu
+  mainMenuScene: 1
 --- !u!114 &663716554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5079,12 +5079,12 @@ GameObject:
   - component: {fileID: 912253916}
   - component: {fileID: 912253915}
   m_Layer: 5
-  m_Name: Canvas (1)
+  m_Name: pauseCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &912253915
 MonoBehaviour:
   m_ObjectHideFlags: 0
