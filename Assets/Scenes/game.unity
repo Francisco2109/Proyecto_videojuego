@@ -3214,7 +3214,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1936811241}
   deathLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!114 &650609050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6407,7 +6407,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1675286635}
   deathLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!95 &1374003723
 Animator:
   serializedVersion: 7
@@ -7990,7 +7990,7 @@ Transform:
   m_GameObject: {fileID: 1675286634}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.352, y: -2.015, z: -0.07980327}
+  m_LocalPosition: {x: 97.81389, y: 64.18684, z: -0.07980327}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8967,7 +8967,7 @@ Transform:
   m_GameObject: {fileID: 1936811240}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.324, y: -3.101, z: -0.090269074}
+  m_LocalPosition: {x: 97.87289, y: 63.21685, z: -0.090269074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
