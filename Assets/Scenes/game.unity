@@ -3800,10 +3800,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 663716551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6faf2eadfefe3249bfe9d6957dc247a, type: 3}
+  m_Script: {fileID: 11500000, guid: d75dcc35a350a0a44b6e18177ab6dc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuScene: 1
+  mainMenuScene: 0
 --- !u!114 &663716554
 MonoBehaviour:
   m_ObjectHideFlags: 0
