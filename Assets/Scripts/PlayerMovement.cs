@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb; 
     private bool isGrounded;
     
-    // --- NUEVAS VARIABLES PARA ANIMACIÓN ---
+    // --- VARIABLES PARA ANIMACIÓN ---
     private Animator anim;
     private SpriteRenderer spriteRenderer;
 
@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
         HandleJump();
         UpdateWalkingSound();
-        UpdateAnimator(); // <-- Llamamos a la actualización de animaciones
+        UpdateAnimator(); // <-- Actualización de animaciones
     }
 
     private void FixedUpdate()
@@ -69,12 +69,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleJump()
     {
+        // Detecta si el personaje está tocando el suelo
         isGrounded = Physics2D.OverlapCircle(
             groundCheck.position,
             groundCheckRadius,
             groundLayer
         ); 
 
+        // Solo permite saltar si está en el suelo (isGrounded es verdadero)
         if (isGrounded && Input.GetKeyDown(jumpKey))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); 
@@ -86,18 +88,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // --- NUEVO MÉTODO PARA ENVIAR DATOS AL ANIMATOR ---
+    // --- MÉTODO PARA ENVIAR DATOS AL ANIMATOR ---
     private void UpdateAnimator()
     {
         if (anim == null) return;
 
-        // 1. Enviamos la velocidad horizontal en valor absoluto (siempre positivo) usando rb.linearVelocity.x
+        // 1. Envía la velocidad horizontal en valor absoluto (siempre positivo)
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
 
-        // 2. Enviamos el estado del suelo
+        // 2. Envía el estado del suelo
         anim.SetBool("IsGrounded", isGrounded);
 
-        // 3. Enviamos la velocidad vertical para que el Animator distinga entre Jump (subiendo) y Fall (bajando)
+        // 3. Envía la velocidad vertical (positivo al subir, negativo al bajar)
         anim.SetFloat("VerticalVelocity", rb.linearVelocity.y);
     }
 

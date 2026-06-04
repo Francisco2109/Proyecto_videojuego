@@ -6341,8 +6341,8 @@ MonoBehaviour:
   leftKey: 97
   rightKey: 100
   jumpKey: 119
-  groundCheck: {fileID: 400603776}
-  groundCheckRadius: 0.8
+  groundCheck: {fileID: 1374003717}
+  groundCheckRadius: 0.4
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -6390,7 +6390,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.28358793, y: 0.3935045}
+  m_Size: {x: 0.19, y: 0.38}
   m_EdgeRadius: 0
 --- !u!114 &1374003722
 MonoBehaviour:
