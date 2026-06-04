@@ -131,10 +131,14 @@ public class GameManager : MonoBehaviour
     // ==================== PAUSE ====================
     public void TogglePause()
     {
-        if (isPaused)
-            ResumeGame();
-        else
-            PauseGame();
+        if (isPaused) { 
+            pauseCanvas.gameObject.SetActive(false);
+            ResumeGame(); 
+            }
+        else { 
+            pauseCanvas.gameObject.SetActive(true);
+            PauseGame(); 
+            }
     }
 
     public void PauseGame()
