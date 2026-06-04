@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     private bool isPaused;
     private bool gameEnded;
 
+    public bool IsGameEnded => gameEnded;
+
     // ==================== INICIALIZACIÓN ====================
     private void Awake()
     {
@@ -114,6 +116,7 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         gameEnded = true;
+        Time.timeScale = 0f;
 
 
         if (SoundManager.Instance != null)
@@ -121,8 +124,6 @@ public class GameManager : MonoBehaviour
 
         if (gameOverCanvas != null)
             gameOverCanvas.SetActive(true);
-
-        Invoke(nameof(StopSounds), 0.5f); // Detiene sonidos después de un breve retraso para permitir que el stinger se reproduzca
 
        // Time.timeScale = 0f;
     }
@@ -230,6 +231,7 @@ public class GameManager : MonoBehaviour
     private void Victory()
     {
         gameEnded = true;
+        Time.timeScale = 0f;
 
 
         if (SoundManager.Instance != null)
@@ -238,7 +240,6 @@ public class GameManager : MonoBehaviour
         if (victoryCanvas != null)
             victoryCanvas.SetActive(true);
 
-        Invoke(nameof(StopSounds), 0.5f); 
         //Time.timeScale = 0f;
     }
 }

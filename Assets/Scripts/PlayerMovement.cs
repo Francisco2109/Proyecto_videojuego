@@ -33,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.IsGameEnded)
+            return;
+
         HandleJump();
         UpdateWalkingSound();
         UpdateAnimator(); // <-- Llamamos a la actualización de animaciones
@@ -40,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance != null && GameManager.Instance.IsGameEnded)
+            return;
+
         HandleMovement();
     }
 
