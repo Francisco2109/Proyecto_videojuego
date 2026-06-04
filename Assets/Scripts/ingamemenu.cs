@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject victoryCanvas;
 
     [Header("Timer")]
-    [SerializeField] private float timeLimit = 120f;
+    [SerializeField] private float timeLimit = 121f;
     [SerializeField] private TMP_Text timerText;
 
     [Header("Lives")]
