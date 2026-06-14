@@ -17,6 +17,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
+    // =======================================================
+    // NUEVAS VARIABLES PARA FORGIVENESS MECHANICS (COYOTE TIME & JUMP BUFFER)
+    // =======================================================
+    [Header("Forgiveness Mechanics")]
+    [SerializeField] private float coyoteTimeDuration = 0.15f; // Cuánto tiempo extra tiene para saltar en el aire
+    private float coyoteTimeCounter;                           // Contador interno para el Coyote Time
+
+    [SerializeField] private float jumpBufferDuration = 0.15f; // Cuánto tiempo antes del suelo se puede presionar saltar
+    private float jumpBufferCounter;                           // Contador interno para el Jump Buffer
+    // =======================================================
+
     private Rigidbody2D rb; 
     private bool isGrounded;
     
@@ -27,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // Buscamos los componentes necesarios en el mismo objeto
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -37,9 +47,13 @@ public class PlayerMovement : MonoBehaviour
         if (GameManager.Instance != null && GameManager.Instance.IsGameEnded)
             return;
 
+        // Primero detectamos si está en el suelo antes de manejar los tiempos
+        CheckGround(); 
+        
+        HandleForgivenessTimers(); // Actualiza los contadores de tiempo de perdón
         HandleJump();
         UpdateWalkingSound();
-        UpdateAnimator(); // <-- Actualización de animaciones
+        UpdateAnimator(); 
     }
 
     private void FixedUpdate()
@@ -50,6 +64,39 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
     }
 
+    private void CheckGround()
+    {
+        // Detecta si el personaje está tocando el suelo
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position,
+            groundCheckRadius,
+            groundLayer
+        );
+    }
+
+    private void HandleForgivenessTimers()
+    {
+        // --- LÓGICA DE COYOTE TIME ---
+        if (isGrounded)
+        {
+            coyoteTimeCounter = coyoteTimeDuration; // Si está en el suelo, el contador se reinicia al máximo
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime; // Si está en el aire, el tiempo empieza a correr hacia atrás
+        }
+
+        // --- LÓGICA DE JUMP BUFFER ---
+        if (Input.GetKeyDown(jumpKey))
+        {
+            jumpBufferCounter = jumpBufferDuration; // Si presionas saltar, guardamos la intención asignando el tiempo máximo
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime; // El valor va disminuyendo con el tiempo
+        }
+    }
+
     private void HandleMovement()
     {
         float direction = 0f;
@@ -57,12 +104,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(leftKey))
         {
             direction = -1f;
-            if (spriteRenderer != null) spriteRenderer.flipX = true; // Mira a la izquierda
+            if (spriteRenderer != null) spriteRenderer.flipX = true; 
         }
         else if (Input.GetKey(rightKey))
         {
             direction = 1f;
-            if (spriteRenderer != null) spriteRenderer.flipX = false; // Mira a la derecha
+            if (spriteRenderer != null) spriteRenderer.flipX = false; 
         }
 
         rb.linearVelocity = new Vector2(direction * moveSpeed, rb.linearVelocity.y); 
@@ -70,15 +117,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleJump()
     {
-        // Detecta si el personaje está tocando el suelo
-        isGrounded = Physics2D.OverlapCircle(
-            groundCheck.position,
-            groundCheckRadius,
-            groundLayer
-        ); 
-
-        // Solo permite saltar si está en el suelo (isGrounded es verdadero)
-        if (isGrounded && Input.GetKeyDown(jumpKey))
+        // MODIFICACIÓN CRUCIAL:
+        // En lugar de "si está en el suelo Y presiona saltar justo ahora", verificamos:
+        // ¿Tiene tiempo de Coyote disponible? (coyoteTimeCounter > 0) Y ¿Presionó saltar hace poquito? (jumpBufferCounter > 0)
+        if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); 
 
@@ -91,21 +133,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumpEffect.Play();
             }
+            // Gastamos de inmediato los contadores para evitar que salte infinitamente en el aire
+            jumpBufferCounter = 0f;
+            coyoteTimeCounter = 0f;
         }
     }
 
-    // --- MÉTODO PARA ENVIAR DATOS AL ANIMATOR ---
     private void UpdateAnimator()
     {
         if (anim == null) return;
 
-        // 1. Envía la velocidad horizontal en valor absoluto (siempre positivo)
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
-
-        // 2. Envía el estado del suelo
         anim.SetBool("IsGrounded", isGrounded);
-
-        // 3. Envía la velocidad vertical (positivo al subir, negativo al bajar)
         anim.SetFloat("VerticalVelocity", rb.linearVelocity.y);
     }
 
