@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private KeyCode leftKey;
     [SerializeField] private KeyCode rightKey;
     [SerializeField] private KeyCode jumpKey;
+    public ParticleSystem jumpEffect; // Efecto de partículas para el salto
 
     [Header("Ground Detector")]
     [SerializeField] private Transform groundCheck;
@@ -84,6 +85,11 @@ public class PlayerMovement : MonoBehaviour
             if (SoundManager.Instance != null)
             {
                 SoundManager.Instance.PlayJump();
+            }
+
+            if (jumpEffect != null)
+            {
+                jumpEffect.Play();
             }
         }
     }
